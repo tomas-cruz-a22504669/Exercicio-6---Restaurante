@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pt-pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Área de Clientes</title>
+</head>
+<body>
+    <h1>Área de Clientes - Histórico</h1>
+    <ul>
+        {% for cliente in clientes %}
+        <li>
+            <strong>{{ cliente.nome }}</strong>
+            <h4>As minhas reservas:</h4>
+            <ul>
+                {% for reserva in cliente.reservas.all %}
+                <li>{{ reserva.restaurante.nome }} - {{ reserva.data }} às {{ reserva.hora }} ({{ reserva.numero_pessoas }} pessoas)</li>
+                {% empty %}
+                <li>Não tem reservas efetuadas.</li>
+                {% endfor %}
+            </ul>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

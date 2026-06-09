@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Guia de Restaurantes</title>
+</head>
+<body>
+    <h1>Guia de Restaurantes</h1>
+    <ul>
+        {% for restaurante in restaurantes %}
+        <li>
+            <strong>{{ restaurante.nome }}</strong> ({{ restaurante.localizacao }}) - Cap: {{ restaurante.capacidade }}
+            
+            <h4>Menu:</h4>
+            <ul>
+                {% for prato in restaurante.pratos.all %}
+                <li>{{ prato.nome }}</li>
+                {% empty %}
+                <li>Nenhum prato registado.</li>
+                {% endfor %}
+            </ul>
+
+            <h4>Reservas:</h4>
+            <ul>
+                {% for reserva in restaurante.reservas.all %}
+                <li>{{ reserva.data }} às {{ reserva.hora }}: {{ reserva.cliente.nome }} ({{ reserva.numero_pessoas }} pessoas)</li>
+                {% empty %}
+                <li>Sem reservas.</li>
+                {% endfor %}
+            </ul>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
